@@ -21,6 +21,12 @@ defmodule AlgorithmsTest do
         assert result == 60
     end
 
+    test "empty_lcm" do
+        numbers = []
+        result = Algorithms.Math.lcm numbers
+        assert result == 0
+    end
+
     test "binary_search" do
         l = [22, 32, 42, 52, 62]
         result = Algorithms.Search.binary l, 52

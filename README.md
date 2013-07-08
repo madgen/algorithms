@@ -9,7 +9,5 @@ Important note: this modules can be slow, because it's my own polygon for learni
 Already implemented algorithms
 ==============================
 
-[*] Binary Search
-[*] GCD & LCM
-[ ] Quicksort
-[ ] Heapsort
+* Binary Search
+* GCD & LCM
