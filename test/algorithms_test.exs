@@ -29,13 +29,15 @@ defmodule AlgorithmsTest do
 
     test "binary_search" do
         l = [22, 32, 42, 52, 62]
-        result = Algorithms.Search.binary l, 52
+        {state, result} = Algorithms.Search.binary l, 52
+        assert state == :ok
         assert result == 4
     end
 
     test "ne_item_binary_search" do
         l = [22, 32, 42, 52, 62]
-        result = Algorithms.Search.binary l, 1337
+        {state, result} = Algorithms.Search.binary l, 1337
+        assert state == :error
         assert result == -1
     end
 

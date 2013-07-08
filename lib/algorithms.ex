@@ -95,7 +95,7 @@ defmodule Algorithms do
         
         defp binary(list, value, start, ends) do
             if start > ends do
-                -1
+                {:error, -1}
             else
                 mid = div (start + ends), 2
                 item = :lists.nth mid, list
@@ -107,7 +107,7 @@ defmodule Algorithms do
                         binary(list, value, mid + 1, ends)
 
                     true ->
-                        mid
+                        {:ok, mid}
                 end
             end
         end
