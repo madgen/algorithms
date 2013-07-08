@@ -50,6 +50,39 @@ defmodule Algorithms do
 
     end
 
+    defmodule Sort do
+        
+        @doc """
+        Sleep sorting, based on https://gist.github.com/StepanKuzmin/3866474
+        """
+        def sleep([]) do
+            []
+        end
+
+        def sleep(list) do
+            pid = self
+            pids = :lists.map fn (x) -> spawn fn -> pid <- wait x end end, list
+            sleep([], pids)
+        end
+
+        defp sleep(list, []) do
+            :lists.reverse list
+        end
+
+        defp sleep(list, pids) do
+            receive do
+                {:ok, pid, num} -> sleep [num | list], pids -- [pid] 
+            end
+        end
+
+        defp wait(num) do
+            pid = self
+            :timer.sleep num
+            {:ok, pid, num}
+        end
+
+    end
+
     defmodule Search do
         
         @doc """

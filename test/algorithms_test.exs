@@ -41,8 +41,24 @@ defmodule AlgorithmsTest do
 
     test "factorial" do
         num = 5
-        result = Algorithms.Math.factorial(5)
+        result = Algorithms.Math.factorial(num)
         assert result == 120
+    end
+
+    test "perfomance" do
+        numbers = :lists.seq(1, 10 * 10 * 10 * 10 * 10)
+        {time, result} = :timer.tc(fn -> Algorithms.Math.gcd(numbers) end)
+        IO.puts "\nRunning perfomance tests..."
+        IO.puts "~> GCD for #{length numbers} numbers is #{result}, time: #{time/1000}"
+        numbers = :lists.reverse :lists.seq(1, 1000)
+        {time, result} = :timer.tc(fn -> Algorithms.Sort.sleep(numbers) end)
+        IO.puts "~> Sleep sort for #{length result} numbers, time: #{time/1000}"
+    end
+
+    test "sleep_sort" do
+        numbers = [1, 2, 0, 10]
+        result = Algorithms.Sort.sleep numbers
+        assert result == [0, 1, 2, 10]
     end
 
 end
