@@ -21,6 +21,9 @@ defmodule Algorithms do
             gcd(second, rem(first, second))
         end
 
+        @doc """
+        Returns LCM of two (or more) integers, based on GCD
+        """
         def lcm([]) do
             0
         end
@@ -31,6 +34,18 @@ defmodule Algorithms do
 
         defp lcm(first, second) do
             div (first * second), gcd([first, second])
+        end
+
+        def factorial(first) do
+            factorial(first - 1, first)
+        end
+
+        defp factorial(1, second) do
+            second
+        end
+
+        defp factorial(first, second) do
+            factorial(first - 1, second * first)
         end
 
     end

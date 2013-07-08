@@ -39,4 +39,10 @@ defmodule AlgorithmsTest do
         assert result == -1
     end
 
+    test "factorial" do
+        num = 5
+        result = Algorithms.Math.factorial(5)
+        assert result == 120
+    end
+
 end

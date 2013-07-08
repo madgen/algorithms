@@ -11,3 +11,4 @@ Already implemented algorithms
 
 * Binary Search
 * GCD & LCM
+* Factorial
