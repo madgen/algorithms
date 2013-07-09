@@ -2,8 +2,7 @@ defmodule Algorithms do
     defmodule Math do
 
         @doc """
-        Returns GCD of two (or more) integers, based on Euclidean algorithm
-        https://en.wikipedia.org/wiki/Euclidean_algorithm
+        Returns GCD of two (or more) integers, based on [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm)
         """
         def gcd([]) do
             0
@@ -22,7 +21,7 @@ defmodule Algorithms do
         end
 
         @doc """
-        Returns LCM of two (or more) integers, based on GCD
+        Returns [LCM](http://en.wikipedia.org/wiki/Least_common_multiple) of two (or more) integers, based on GCD
         """
         def lcm([]) do
             0
@@ -36,6 +35,9 @@ defmodule Algorithms do
             div (first * second), gcd([first, second])
         end
 
+        @doc """
+        Returns [factorial](http://en.wikipedia.org/wiki/Factorial) for given integer
+        """
         def factorial(first) do
             factorial(first - 1, first)
         end
@@ -53,7 +55,7 @@ defmodule Algorithms do
     defmodule Sort do
         
         @doc """
-        Sleep sorting, based on https://gist.github.com/StepanKuzmin/3866474
+        Sleep sorting, based on [StepanKuzmin snippet](https://gist.github.com/StepanKuzmin/3866474)
         """
         def sleep([]) do
             []
@@ -61,12 +63,12 @@ defmodule Algorithms do
 
         def sleep(list) do
             pid = self
-            pids = :lists.map fn (x) -> spawn fn -> pid <- wait x end end, list
+            pids = Enum.map list, fn (x) -> spawn fn -> pid <- wait x end end
             sleep([], pids)
         end
 
         defp sleep(list, []) do
-            :lists.reverse list
+            Enum.reverse list
         end
 
         defp sleep(list, pids) do
@@ -79,6 +81,19 @@ defmodule Algorithms do
             pid = self
             :timer.sleep num
             {:ok, pid, num}
+        end
+
+        @doc """
+        Performs quicksort on list, based on [edgurgel snippet](https://coderwall.com/p/vusjtq)
+        """
+        def quick([]) do
+            []
+        end
+
+        def quick([head|tail]) do
+            # split list into two lists:
+            {left, right} = Enum.partition tail, fn (x) -> x < head end
+            quick(left) ++ [head] ++ quick(right)
         end
 
     end
