@@ -48,19 +48,28 @@ defmodule AlgorithmsTest do
     end
 
     test "perfomance" do
-        numbers = :lists.seq(1, 10 * 10 * 10 * 10 * 10)
-        {time, result} = :timer.tc(fn -> Algorithms.Math.gcd(numbers) end)
         IO.puts "\nRunning perfomance tests..."
-        IO.puts "~> GCD for #{length numbers} numbers is #{result}, time: #{time/1000}"
+        numbers = :lists.seq(1, 100000)
+        {time, _} = :timer.tc(fn -> Algorithms.Math.gcd(numbers) end)
+        IO.puts "\n~> GCD for #{length numbers} numbers, time: #{time/1000} ms."
         numbers = :lists.reverse :lists.seq(1, 1000)
+        {time, _} = :timer.tc(fn -> Algorithms.Math.lcm(numbers) end)
+        IO.puts "~> LCM for #{length numbers} numbers, time: #{time/1000} ms."
         {time, result} = :timer.tc(fn -> Algorithms.Sort.sleep(numbers) end)
-        IO.puts "~> Sleep sort for #{length result} numbers, time: #{time/1000}"
+        IO.puts "~> Sleep sort for #{length result} numbers, time: #{time/1000} ms."
+        {time, result} = :timer.tc(fn -> Algorithms.Sort.quick(numbers) end)
+        IO.puts "~> Quick sort for #{length result} numbers, time: #{time/1000} ms."
     end
 
-    test "sleep_sort" do
+    test "sleepsort" do
         numbers = [1, 2, 0, 10]
         result = Algorithms.Sort.sleep numbers
         assert result == [0, 1, 2, 10]
     end
 
+    test "quicksort" do
+        numbers = [12, 0, 1, 8, 10]
+        result = Algorithms.Sort.quick numbers
+        assert result == [0, 1, 8, 10, 12]
+    end
 end

@@ -12,3 +12,4 @@ Already implemented
 * GCD & LCM
 * Factorial
 * Sleep sort
+* Quick sort
