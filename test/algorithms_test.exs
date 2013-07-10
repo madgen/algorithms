@@ -12,7 +12,7 @@ defmodule AlgorithmsTest do
     test "empty_gcd" do
         numbers = []
         result = Algorithms.Math.gcd numbers
-        assert result == 0
+        assert result == 1
     end
 
     test "lcm" do
@@ -72,4 +72,5 @@ defmodule AlgorithmsTest do
         result = Algorithms.Sort.quick numbers
         assert result == [0, 1, 8, 10, 12]
     end
+
 end
