@@ -3,9 +3,22 @@ defmodule Algorithms do
 
         @doc """
         Returns GCD of two (or more) integers, based on [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm)
+
+
+        # Example
+
+            numbers = [10, 20]
+            gcd = Algorithms.Math.gcd numbers
+            IO.puts gcd  # prints 10
+
+            numbers = [10, 20, 25]
+            gcd = Algorithms.Math.gcd numbers
+            IO.puts gcd
+            #=> 5
+
         """
         def gcd([]) do
-            0
+            1
         end
 
         def gcd([head|tail]) do
@@ -85,17 +98,24 @@ defmodule Algorithms do
 
         @doc """
         Performs quicksort on list, based on [edgurgel snippet](https://coderwall.com/p/vusjtq)
+
+
+        # Example
+
+            numbers = [3, 2, 5, 1, 4]
+            sorted_numbers = Algorithms.Sort.quick numbers
+            IO.puts sorted_numbers
+            #=> [1, 2, 3, 4, 5]
+
         """
         def quick([]) do
             []
         end
 
         def quick([head|tail]) do
-            # split list into two lists:
             {left, right} = Enum.partition tail, fn (x) -> x < head end
             quick(left) ++ [head] ++ quick(right)
         end
-
     end
 
     defmodule Search do
@@ -103,7 +123,21 @@ defmodule Algorithms do
         @doc """
         Binary search algorithm.
         Returns index of value in list or -1 if list doesn't contains value
+
+
+        # Example
+
+            numbers = [28, 17, 42]
+            {:ok, index} = Algorithms.Search.binary numbers, 17
+            IO.puts index
+            #=> 2
+
         """
+
+        def binary([], value) do
+            {:error, -1}
+        end
+
         def binary(list, value) do
             binary(list, value, 1, length list)
         end
@@ -127,4 +161,20 @@ defmodule Algorithms do
             end
         end
     end
+
+    defmodule Common do
+        
+        def permute([]) do
+            []
+        end
+
+        def permute(list) do
+            lc x inlist list do
+                y = permute list -- [x]
+                permute [x|y]
+            end
+        end
+
+    end
+
 end
