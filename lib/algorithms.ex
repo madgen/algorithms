@@ -50,6 +50,13 @@ defmodule Algorithms do
 
         @doc """
         Returns [factorial](http://en.wikipedia.org/wiki/Factorial) for given integer
+
+        # Example
+            number = 5
+            fac = Algorithms.Math.factorial number
+            IO.puts fac
+            #=> 120
+
         """
         def factorial(first) do
             factorial(first - 1, first)
@@ -161,20 +168,4 @@ defmodule Algorithms do
             end
         end
     end
-
-    defmodule Common do
-        
-        def permute([]) do
-            []
-        end
-
-        def permute(list) do
-            lc x inlist list do
-                y = permute list -- [x]
-                permute [x|y]
-            end
-        end
-
-    end
-
 end
