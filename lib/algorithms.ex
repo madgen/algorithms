@@ -35,6 +35,13 @@ defmodule Algorithms do
 
         @doc """
         Returns [LCM](http://en.wikipedia.org/wiki/Least_common_multiple) of two (or more) integers, based on GCD
+
+        # Example
+            numbers = [4, 6]
+            result = Algorithms.Math.lcm numbers
+            IO.puts result
+            #=> 12
+
         """
         def lcm([]) do
             0
