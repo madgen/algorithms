@@ -4,9 +4,8 @@ defmodule Algorithms.Mixfile do
   def project do
     [ app: :algorithms,
       version: "0.0.2",
-      elixir: "0.10.0",
+      # elixir: "0.10.0",
       source_url: "https://github.com/valmet/algorithms",
-
       deps: deps ]
   end
 
