@@ -77,6 +77,18 @@ defmodule Algorithms do
             factorial(first - 1, second * first)
         end
 
+        def binpow(first, second) do
+            cond do
+                second == 0 ->
+                    1
+                rem(second, 2) == 1 ->
+                    binpow(first, second - 1) * first
+                true ->
+                    third = binpow(first, div(second, 2))
+                    third * third
+            end
+        end
+
     end
 
     defmodule Sort do

@@ -73,4 +73,14 @@ defmodule AlgorithmsTest do
         assert result == [0, 1, 8, 10, 12]
     end
 
+    test "binary_pow" do
+        first = 16
+        second = 2
+        result = Algorithms.Math.binpow(first, second)
+        assert result == 256
+        first = 8
+        second = 8
+        result = Algorithms.Math.binpow(first, second)
+        assert result == 16777216
+    end
 end
