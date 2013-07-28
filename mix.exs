@@ -18,7 +18,7 @@ defmodule Algorithms.Mixfile do
   # { :foobar, "0.1", git: "https://github.com/elixir-lang/foobar.git" }
   defp deps do
     [
-    #  { :benchmark, github: "meh/elixir-benchmark" },
+      { :benchmark, github: "meh/elixir-benchmark" },
     #  { :ex_doc, github: "elixir-lang/ex_doc" },
     ]
   end

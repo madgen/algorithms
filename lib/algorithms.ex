@@ -77,7 +77,7 @@ defmodule Algorithms do
             factorial(first - 1, second * first)
         end
 
-        def binpow(first, second) do
+        def binpow(first, second // 1) do
             cond do
                 second == 0 ->
                     1
