@@ -22,7 +22,7 @@ defmodule Algorithms do
         end
 
         def gcd([head|tail]) do
-            :lists.foldl fn (first, second) -> gcd(first, second) end, head, tail
+            :lists.foldl gcd(&1, &2), head, tail
         end
 
         defp gcd(first, 0) do
@@ -48,7 +48,7 @@ defmodule Algorithms do
         end
 
         def lcm([head|tail]) do
-            :lists.foldl fn (first, second) -> lcm(first, second) end, head, tail
+            :lists.foldl lcm(&1, &2), head, tail
         end
 
         defp lcm(first, second) do
@@ -139,7 +139,7 @@ defmodule Algorithms do
         end
 
         def quick([head|tail]) do
-            {left, right} = Enum.partition tail, fn (x) -> x < head end
+            {left, right} = Enum.partition tail, &1 < head
             quick(left) ++ [head] ++ quick(right)
         end
     end
@@ -167,23 +167,21 @@ defmodule Algorithms do
         def binary(list, value) do
             binary(list, value, 1, length list)
         end
-        
+
+        defp binary(list, value, start, ends) when  start > ends do
+            {:error, -1}
+        end
+
         defp binary(list, value, start, ends) do
-            if start > ends do
-                {:error, -1}
-            else
-                mid = div (start + ends), 2
-                item = :lists.nth mid, list
-                cond do
-                    value < item ->
-                        binary(list, value, start, mid - 1)
-
-                    value > item ->
-                        binary(list, value, mid + 1, ends)
-
-                    true ->
-                        {:ok, mid}
-                end
+            mid = div (start + ends), 2
+            item = :lists.nth mid, list
+            cond do
+                value < item ->
+                    binary(list, value, start, mid - 1)
+                value > item ->
+                    binary(list, value, mid + 1, ends)
+                true ->
+                    {:ok, mid}
             end
         end
     end
