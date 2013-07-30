@@ -77,6 +77,10 @@ defmodule Algorithms do
             factorial(first - 1, second * first)
         end
 
+        @doc """
+        Performs binary exponentiation on given number.
+        Note: it's a bad implementation. Use built-in Erlang math:pow.
+        """
         def binpow(first, second // 1) do
             cond do
                 second == 0 ->
