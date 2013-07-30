@@ -90,16 +90,18 @@ defmodule Algorithms do
         Performs binary exponentiation on given number.
         Note: it's a bad implementation. Use built-in Erlang math:pow.
         """
+
+        def binpow(first, 0) do
+            1
+        end
+
+        def binpow(first, second) when rem(second, 2) == 1 do
+            binpow(first, second - 1) * first
+        end
+
         def binpow(first, second // 1) do
-            cond do
-                second == 0 ->
-                    1
-                rem(second, 2) == 1 ->
-                    binpow(first, second - 1) * first
-                true ->
-                    third = binpow(first, div(second, 2))
-                    third * third
-            end
+            third = binpow(first, div(second, 2))
+            third * third
         end
 
     end

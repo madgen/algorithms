@@ -71,7 +71,7 @@ defmodule AlgorithmsTest do
         IO.puts "\n~> GCD for #{length numbers} numbers:"
         IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
 
-        {max, min, avg} = get_benchmark_results(Benchmark.times 1000, do: Algorithms.Search.binary(numbers, 18))
+        {max, min, avg} = get_benchmark_results(Benchmark.times 1000, do: Algorithms.Search.binary(numbers, 500))
         IO.puts "\n~> Binary search in #{length numbers} numbers:"
         IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
         
@@ -92,6 +92,10 @@ defmodule AlgorithmsTest do
 
         {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: Algorithms.Math.binpow(2, 16))
         IO.puts "\n~> Binary exponentiation, medium exponents, 100000 iterations:"
+        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
+
+        {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: :math.pow(2, 16))
+        IO.puts "\n~> Native Erlang exponentiation, medium exponents, 100000 iterations:"
         IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
 
         # {time, _} = :timer.tc(fn ->  end)
