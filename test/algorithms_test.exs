@@ -81,6 +81,19 @@ defmodule AlgorithmsTest do
         IO.puts "\n~> LCM for #{length numbers} numbers:"
         IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
 
+
+        {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: Algorithms.Math.binpow(2, 2))
+        IO.puts "\n~> Binary exponentiation, small exponents, 100000 iterations:"
+        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
+
+        {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: :math.pow(2, 2))
+        IO.puts "\n~> Native Erlang exponentiation, small exponents, 100000 iterations:"
+        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
+
+        {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: Algorithms.Math.binpow(2, 16))
+        IO.puts "\n~> Binary exponentiation, medium exponents, 100000 iterations:"
+        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
+
         # {time, _} = :timer.tc(fn ->  end)
         # IO.puts "~>  numbers, time: #{time/1000} ms."
         # {time, result} = :timer.tc(fn -> Algorithms.Sort.sleep(numbers) end)
