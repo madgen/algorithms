@@ -1,5 +1,14 @@
 defmodule Algorithms do
+
+    @moduledoc """
+    Collection of algorirhms, inspired by nryoung/algorithms
+    """
+
     defmodule Math do
+
+        @moduledoc """
+        Math related algorithms
+        """
 
         @doc """
         Returns GCD of two (or more) integers, based on [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm)
@@ -96,6 +105,10 @@ defmodule Algorithms do
     end
 
     defmodule Sort do
+
+        @moduledoc """
+        Sorting related algorithms
+        """
         
         @doc """
         Sleep sorting, based on [StepanKuzmin snippet](https://gist.github.com/StepanKuzmin/3866474)
@@ -149,6 +162,10 @@ defmodule Algorithms do
     end
 
     defmodule Search do
+
+        @moduledoc """
+        Search related algorithms
+        """
         
         @doc """
         Binary search algorithm.
@@ -158,9 +175,15 @@ defmodule Algorithms do
         # Example
 
             numbers = [28, 17, 42]
+
+            # Existing number
             {:ok, index} = Algorithms.Search.binary numbers, 17
             IO.puts index
             #=> 2
+
+            {:error, index} = Algorithms.Search.binary numbers 1337
+            IO.puts index
+            #=> -1
 
         """
 

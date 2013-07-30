@@ -19,7 +19,7 @@ defmodule Algorithms.Mixfile do
   defp deps do
     [
       { :benchmark, github: "meh/elixir-benchmark" },
-    #  { :ex_doc, github: "elixir-lang/ex_doc" },
+      { :ex_doc, github: "elixir-lang/ex_doc" },
     ]
   end
 end
