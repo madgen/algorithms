@@ -61,6 +61,11 @@
     <a href="#lcm/1">lcm/1</a>
   </span>
 </li>
+<li>
+  <span class="summary_signature">
+    <a href="#square/1">square/1</a>
+  </span>
+</li>
 
         </ul>
       
@@ -74,7 +79,7 @@
           <h2>Functions</h2>
           <div class="detail">
   <p class="signature" id="binpow/2">
-    <strong>binpow(first, second // 1)</strong>
+    <strong>binpow(first, second)</strong>
   </p>
   <div class="docstring"><p>Performs binary exponentiation on given number.
 Note: it&#39;s a bad implementation. Use built-in Erlang math:pow.</p>
@@ -85,7 +90,7 @@ Note: it&#39;s a bad implementation. Use built-in Erlang math:pow.</p>
   <p class="signature" id="factorial/1">
     <strong>factorial(first)</strong>
   </p>
-  <div class="docstring"><p>Returns <a href="http://en.wikipedia.org/wiki/Factorial">factorial</a> for given integer</p>
+  <div class="docstring"><p>Returns <a href="https://en.wikipedia.org/wiki/Factorial">factorial</a> for given integer</p>
 
 <h1>Example</h1>
 
@@ -107,7 +112,8 @@ IO.puts fac
 
 <pre><code>numbers = [10, 20]
 gcd = Algorithms.Math.gcd numbers
-IO.puts gcd  # prints 10
+IO.puts gcd
+#=&gt; 10
 
 numbers = [10, 20, 25]
 gcd = Algorithms.Math.gcd numbers
@@ -130,6 +136,14 @@ result = Algorithms.Math.lcm numbers
 IO.puts result
 #=&gt; 12
 </code></pre>
+</div>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="square/1">
+    <strong>square(number)</strong>
+  </p>
+  <div class="docstring"><p>Returns square for given integer. Dummy function for testing :)</p>
 </div>
   
 </div>
