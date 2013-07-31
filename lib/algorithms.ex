@@ -1,7 +1,7 @@
 defmodule Algorithms do
 
     @moduledoc """
-    Collection of algorirhms, inspired by nryoung/algorithms
+    Collection of algorithms, inspired by nryoung/algorithms
     """
 
     defmodule Math do
@@ -18,7 +18,8 @@ defmodule Algorithms do
 
             numbers = [10, 20]
             gcd = Algorithms.Math.gcd numbers
-            IO.puts gcd  # prints 10
+            IO.puts gcd
+            #=> 10
 
             numbers = [10, 20, 25]
             gcd = Algorithms.Math.gcd numbers
@@ -53,7 +54,7 @@ defmodule Algorithms do
 
         """
         def lcm([]) do
-            0
+            1
         end
 
         def lcm([head|tail]) do
@@ -65,7 +66,7 @@ defmodule Algorithms do
         end
 
         @doc """
-        Returns [factorial](http://en.wikipedia.org/wiki/Factorial) for given integer
+        Returns [factorial](https://en.wikipedia.org/wiki/Factorial) for given integer
 
         # Example
             number = 5
@@ -102,6 +103,13 @@ defmodule Algorithms do
         def binpow(first, second // 1) do
             third = binpow(first, div(second, 2))
             third * third
+        end
+
+        @doc """
+        Returns square for given integer. Dummy function for testing :)
+        """
+        def square(number) do
+            number * 2
         end
 
     end
@@ -197,7 +205,7 @@ defmodule Algorithms do
             binary(list, value, 1, length list)
         end
 
-        defp binary(list, value, start, ends) when  start > ends do
+        defp binary(list, value, start, ends) when start > ends do
             {:error, -1}
         end
 
@@ -213,5 +221,11 @@ defmodule Algorithms do
                     {:ok, mid}
             end
         end
+
+        @doc """
+        Graph implementation
+        """
+        defrecord Graph, nodes: []
+        defrecord Node, name: nil, childrens: []
     end
 end
