@@ -92,7 +92,7 @@ defmodule Algorithms do
         Note: it's a bad implementation. Use built-in Erlang math:pow.
         """
 
-        def binpow(first, 0) do
+        def binpow(_, 0) do
             1
         end
 
@@ -100,7 +100,7 @@ defmodule Algorithms do
             binpow(first, second - 1) * first
         end
 
-        def binpow(first, second // 1) do
+        def binpow(first, second) do
             third = binpow(first, div(second, 2))
             third * third
         end
@@ -197,7 +197,7 @@ defmodule Algorithms do
 
         """
 
-        def binary([], value) do
+        def binary([], _) do
             {:error, -1}
         end
 
@@ -205,7 +205,7 @@ defmodule Algorithms do
             binary(list, value, 1, length list)
         end
 
-        defp binary(list, value, start, ends) when start > ends do
+        defp binary(_, _, start, ends) when start > ends do
             {:error, -1}
         end
 
@@ -221,11 +221,44 @@ defmodule Algorithms do
                     {:ok, mid}
             end
         end
+    end
+
+    defrecord Graph, nodes: [] do
 
         @doc """
-        Graph implementation
+        Inserts given node to graph. Returns state (`:ok`) and new graph record.
         """
-        defrecord Graph, nodes: []
-        defrecord Node, name: nil, childrens: []
+
+        def insert(graph, [head|tail]) do
+            {:ok, graph} = insert(graph, head)
+            insert(graph, tail)
+        end
+
+        def insert(graph, node) do
+            nodes = graph.nodes ++ node
+            {:ok, Graph.new(nodes: nodes)}
+        end
+
+        @doc """
+        Removes given node from graph. As `insert` function, returns state and new graph.
+        """
+
+        def remove(graph, [head|tail]) do
+            {:ok, graph} = remove(graph, head)
+            remove(graph, tail)
+        end
+
+        def remove(graph, node) do
+            nodes = graph.nodes -- [node]
+            {:ok, Graph.new(nodes: nodes)}
+        end
+
     end
+
+    defrecord Node, name: nil, childrens: []
+
+    # def dfs(graph, start, path) do
+
+    # end
+
 end

@@ -1,8 +1,7 @@
 Code.require_file "test_helper.exs", __DIR__
 
-defmodule AlgorithmsTest do
+defmodule MathTest do
     use ExUnit.Case
-    require Benchmark
 
     test "gcd" do
         numbers = [105, 70, 35, 15]
@@ -25,8 +24,53 @@ defmodule AlgorithmsTest do
     test "empty_lcm" do
         numbers = []
         result = Algorithms.Math.lcm numbers
-        assert result == 0
+        assert result == 1
     end
+
+    test "factorial" do
+        num = 5
+        result = Algorithms.Math.factorial(num)
+        assert result == 120
+    end
+
+    test "binary_pow" do
+        first = 16
+        second = 2
+        result = Algorithms.Math.binpow(first, second)
+        assert result == 256
+        first = 8
+        second = 8
+        result = Algorithms.Math.binpow(first, second)
+        assert result == 16777216
+    end
+
+    test "square" do
+        number = 2
+        result = Algorithms.Math.square number
+        assert result == 4
+    end
+
+end
+
+defmodule SortTest do
+    use ExUnit.Case
+
+    test "sleepsort" do
+        numbers = [1, 2, 0, 10]
+        result = Algorithms.Sort.sleep numbers
+        assert result == [0, 1, 2, 10]
+    end
+
+    test "quicksort" do
+        numbers = [12, 0, 1, 8, 10]
+        result = Algorithms.Sort.quick numbers
+        assert result == [0, 1, 8, 10, 12]
+    end
+
+end
+
+defmodule SearchTest do
+    use ExUnit.Case
 
     test "binary_search" do
         l = [22, 32, 42, 52, 62]
@@ -50,92 +94,34 @@ defmodule AlgorithmsTest do
         assert result == -1
     end
 
-    test "factorial" do
-        num = 5
-        result = Algorithms.Math.factorial(num)
-        assert result == 120
+end
+
+defmodule GraphTest do
+    use ExUnit.Case
+
+    test "create_graph" do
+        graph = Algorithms.Graph.new(nodes: [1, 2, 3])
+        assert graph.nodes == [1, 2, 3]
     end
 
-    def get_benchmark_results(kw) do
-        max = inspect(Keyword.get kw, :max)
-        min = inspect(Keyword.get kw, :min)
-        average = inspect(Keyword.get kw, :average)
-        {max, min, average}
+    test "insert_node_to_graph" do
+        node = Algorithms.Node.new(name: "Head")
+        graph = Algorithms.Graph.new(nodes: [])
+        {:ok, graph} = Algorithms.Graph.insert(graph, node)
+        assert graph.nodes == node
     end
 
-    test "perfomance" do
-        IO.puts "\nRunning perfomance tests..."
-        numbers = :lists.seq(1, 1000)
-
-        {max, min, avg} = get_benchmark_results(Benchmark.times 1000, do: Algorithms.Math.gcd(numbers))
-        IO.puts "\n~> GCD for #{length numbers} numbers:"
-        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
-
-        {max, min, avg} = get_benchmark_results(Benchmark.times 1000, do: Algorithms.Search.binary(numbers, 500))
-        IO.puts "\n~> Binary search in #{length numbers} numbers:"
-        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
-        
-        numbers = Enum.reverse :lists.seq(1, 1000)
-
-        {max, min, avg} = get_benchmark_results(Benchmark.times 1000, do: Algorithms.Math.lcm(numbers))
-        IO.puts "\n~> LCM for #{length numbers} numbers:"
-        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
-
-
-        {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: Algorithms.Math.binpow(2, 2))
-        IO.puts "\n~> Binary exponentiation, small exponents, 100000 iterations:"
-        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
-
-        {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: :math.pow(2, 2))
-        IO.puts "\n~> Native Erlang exponentiation, small exponents, 100000 iterations:"
-        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
-
-        {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: Algorithms.Math.binpow(2, 16))
-        IO.puts "\n~> Binary exponentiation, medium exponents, 100000 iterations:"
-        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
-
-        {max, min, avg} = get_benchmark_results(Benchmark.times 100000, do: :math.pow(2, 16))
-        IO.puts "\n~> Native Erlang exponentiation, medium exponents, 100000 iterations:"
-        IO.puts "~| Max: #{max}\n~| Min: #{min}\n~| Average: #{avg}"
-
-        # {time, _} = :timer.tc(fn ->  end)
-        # IO.puts "~>  numbers, time: #{time/1000} ms."
-        # {time, result} = :timer.tc(fn -> Algorithms.Sort.sleep(numbers) end)
-        # IO.puts "~> Sleep sort for #{length result} numbers, time: #{time/1000} ms."
-        # {time, result} = :timer.tc(fn -> Algorithms.Sort.quick(numbers) end)
-        # IO.puts "~> Quick sort for #{length result} numbers, time: #{time/1000} ms."
-        # {time, result} = :timer.tc(fn -> Enum.map(numbers, fn (x) -> Algorithms.Math.binpow x, 10 end) end)
-        # IO.puts "~> Binary exponentiation of #{length result} numbers, time: #{time/1000} ms."
-        # {time, result} = :timer.tc(fn -> Enum.map(numbers, fn (x) -> :math.pow x, 10 end) end)
-        # IO.puts "~> Native Erlang exponentiation of #{length result} numbers, time: #{time/1000} ms."
+    test "insert_multiple_nodes" do
+        first_node = Algorithms.Node.new(name: "Head")
+        second_node = Algorithms.Node.new(name: "Tail")
+        graph = Algorithms.Graph.new(nodes: [first_node, second_node])
+        assert length(graph.nodes) == 2
     end
 
-    test "sleepsort" do
-        numbers = [1, 2, 0, 10]
-        result = Algorithms.Sort.sleep numbers
-        assert result == [0, 1, 2, 10]
-    end
-
-    test "quicksort" do
-        numbers = [12, 0, 1, 8, 10]
-        result = Algorithms.Sort.quick numbers
-        assert result == [0, 1, 8, 10, 12]
-    end
-
-    test "binary_pow" do
-        first = 16
-        second = 2
-        result = Algorithms.Math.binpow(first, second)
-        assert result == 256
-        first = 8
-        second = 8
-        result = Algorithms.Math.binpow(first, second)
-        assert result == 16777216
-    end
-
-    test "binary_pow_without_second_arg" do
-        number = 16
-        result = Algorithms.Math.binpow number
-        assert result == 16
+    test "remove_node_from_graph" do
+        node = Algorithms.Node.new(name: "Head")
+        graph = Algorithms.Graph.new(nodes: [node])
+        {:ok, graph} = Algorithms.Graph.remove(graph, node)
+        assert graph.nodes == []
     end
 end
