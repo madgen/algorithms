@@ -108,14 +108,14 @@ defmodule GraphTest do
         node = Algorithms.Node.new(name: "Head")
         graph = Algorithms.Graph.new(nodes: [])
         {:ok, graph} = Algorithms.Graph.insert(graph, node)
-        assert graph.nodes == node
+        assert graph.nodes == [node]
     end
 
     test "insert_multiple_nodes" do
         first_node = Algorithms.Node.new(name: "Head")
         second_node = Algorithms.Node.new(name: "Tail")
         graph = Algorithms.Graph.new(nodes: [first_node, second_node])
-        assert length(graph.nodes) == 2
+        assert graph.nodes == [first_node, second_node]
     end
 
     test "remove_node_from_graph" do
@@ -124,4 +124,19 @@ defmodule GraphTest do
         {:ok, graph} = Algorithms.Graph.remove(graph, node)
         assert graph.nodes == []
     end
+
+    test "create_node" do
+        node = Algorithms.Node.new(name: "Python", nodes: ["PyPy"])
+        assert node.name == "Python"
+        assert node.nodes == ["PyPy"]
+    end
+
+    test "append_children_to_node" do
+        node = Algorithms.Node.new(name: "Python", nodes: [])
+        first_node = Algorithms.Node.new(name: "Head")
+        second_node = Algorithms.Node.new(name: "Tail")
+        {:ok, node} = Algorithms.Node.insert(node, [first_node, second_node])
+        assert node.nodes == [first_node, second_node]
+    end
+
 end
