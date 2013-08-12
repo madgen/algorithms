@@ -105,13 +105,6 @@ defmodule GraphTest do
     end
 
     test "insert_node_to_graph" do
-        node = Algorithms.Node.new(name: "Head")
-        graph = Algorithms.Graph.new(nodes: [])
-        {:ok, graph} = Algorithms.Graph.insert(graph, node)
-        assert graph.nodes == [node]
-    end
-
-    test "insert_multiple_nodes" do
         first_node = Algorithms.Node.new(name: "Head")
         second_node = Algorithms.Node.new(name: "Tail")
         graph = Algorithms.Graph.new(nodes: [first_node, second_node])
