@@ -1,7 +1,7 @@
 Code.require_file "test_helper.exs", __DIR__
 
 defmodule MathTest do
-    use ExUnit.Case
+    use ExUnit.Case, async: true
 
     test "gcd" do
         numbers = [105, 70, 35, 15]
@@ -53,7 +53,7 @@ defmodule MathTest do
 end
 
 defmodule SortTest do
-    use ExUnit.Case
+    use ExUnit.Case, async: true
 
     test "sleepsort" do
         numbers = [1, 2, 0, 10]
@@ -70,7 +70,7 @@ defmodule SortTest do
 end
 
 defmodule SearchTest do
-    use ExUnit.Case
+    use ExUnit.Case, async: true
 
     test "binary_search" do
         l = [22, 32, 42, 52, 62]
@@ -97,7 +97,7 @@ defmodule SearchTest do
 end
 
 defmodule GraphTest do
-    use ExUnit.Case
+    use ExUnit.Case, async: true
 
     test "create_graph" do
         graph = Algorithms.Graph.new(nodes: [1, 2, 3])
