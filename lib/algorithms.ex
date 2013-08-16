@@ -109,7 +109,7 @@ defmodule Algorithms do
         Returns square for given integer. Dummy function for testing :)
         """
         def square(number) do
-            number * numbe
+            number * number
         end
 
     end
