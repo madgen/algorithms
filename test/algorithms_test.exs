@@ -45,9 +45,9 @@ defmodule MathTest do
     end
 
     test "square" do
-        number = 2
+        number = 4
         result = Algorithms.Math.square number
-        assert result == 4
+        assert result == 16
     end
 
 end
