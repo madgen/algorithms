@@ -132,4 +132,14 @@ defmodule GraphTest do
         assert node.nodes == [first_node, second_node]
     end
 
+    test "deep first search" do
+      cpp = Algorithms.Node.new(name: "C++")
+      erlang = Algorithms.Node.new(name: "Erlang")
+      {:ok, cpp} = Algorithms.Node.insert(cpp, [erlang])
+      graph = Algorithms.Graph.new(nodes: [cpp, erlang])
+      {state, node} = Algorithms.dfs(graph, erlang)
+      assert state == :ok
+      assert node == erlang
+    end
+
 end

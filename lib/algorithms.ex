@@ -295,7 +295,28 @@ defmodule Algorithms do
 
     end
 
-    # def dfs(graph, start, path) do
+    def dfs(:node, node, goal) do  
+      if node == goal do
+        {:ok, node}
+      else
+        dfs(node.nodes, goal)
+      end
+    end
 
-    # end
+    def dfs([], goal) do
+      {:error, goal}
+    end
+
+    def dfs([head|tail], goal) do
+      try do
+        dfs(:node, head, goal)
+      catch
+        _ -> dfs(tail, goal)
+      end
+    end
+
+    def dfs(graph, goal) do
+      dfs(graph.nodes, goal)
+    end
+
 end
