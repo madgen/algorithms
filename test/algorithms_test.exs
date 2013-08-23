@@ -140,6 +140,10 @@ defmodule GraphTest do
       {state, node} = Algorithms.dfs(graph, erlang)
       assert state == :ok
       assert node == erlang
+      elixir = Algorithms.Node.new(name: "Elixir")
+      {state, node} = Algorithms.dfs(graph, elixir)
+      assert state == :error
+      assert node == elixir
     end
 
 end
