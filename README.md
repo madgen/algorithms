@@ -13,3 +13,4 @@ Important note: this modules can be slow, because it's my own polygon for learni
 * Factorial
 * Sleep sort
 * Quick sort
+* Deep First Search
