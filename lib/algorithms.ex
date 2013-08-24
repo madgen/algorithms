@@ -293,7 +293,7 @@ defmodule Algorithms do
             {:ok, Node.new(name: parent.name, nodes: nodes)}
         end
 
-    end
+    end 
 
     def dfs(:node, node, goal) do  
       if node == goal do
@@ -308,9 +308,8 @@ defmodule Algorithms do
     end
 
     def dfs([head|tail], goal) do
-      try do
-        dfs(:node, head, goal)
-      catch
+      case dfs(:node, head, goal) do
+        {:ok, node} -> {:ok, node}
         _ -> dfs(tail, goal)
       end
     end
