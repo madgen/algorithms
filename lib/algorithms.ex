@@ -314,7 +314,7 @@ defmodule Algorithms do
       end
     end
 
-    def dfs(graph, goal) do
+    def dfs(graph, goal) when is_record(graph, Algorithms.Graph) do
       dfs(graph.nodes, goal)
     end
 
