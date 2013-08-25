@@ -295,27 +295,28 @@ defmodule Algorithms do
 
     end 
 
-    def dfs(:node, node, goal) do  
+    def dfs(node, goal, path) when is_record(node, Algorithms.Node) do
+      path = path ++ [node]
       if node == goal do
-        {:ok, node}
+        {:ok, node, path}
       else
-        dfs(node.nodes, goal)
+        dfs(node.nodes, goal, path)
       end
     end
 
-    def dfs([], goal) do
+    def dfs([head|tail], goal, path) do
+      case dfs(head, goal, path) do
+        {:ok, node, path} -> {:ok, node, path}
+        _ -> dfs(tail, goal, path)
+      end
+    end
+
+    def dfs([], goal, path) do
       {:error, goal}
     end
 
-    def dfs([head|tail], goal) do
-      case dfs(:node, head, goal) do
-        {:ok, node} -> {:ok, node}
-        _ -> dfs(tail, goal)
-      end
-    end
-
     def dfs(graph, goal) when is_record(graph, Algorithms.Graph) do
-      dfs(graph.nodes, goal)
+      dfs(graph.nodes, goal, [])
     end
 
 end
