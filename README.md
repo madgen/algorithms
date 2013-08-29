@@ -10,7 +10,6 @@ Important note: this modules can be slow, because it's my own polygon for learni
 * Binary Search
 * GCD & LCM
 * Binary exponentiation
-* Factorial
 * Sleep sort
 * Quick sort
 * Deep First Search
