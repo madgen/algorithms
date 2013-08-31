@@ -1,4 +1,4 @@
-# Algorithms
+# Algorithms [![Build Status](https://travis-ci.org/valmet/algorithms.png?branch=master)](https://travis-ci.org/valmet/algorithms)
 
 Collection of algorithms, inspired by [nryoung/algorithms](https://github.com/nryoung/algorithms)
 
