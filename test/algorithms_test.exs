@@ -94,6 +94,37 @@ defmodule SearchTest do
         assert result == -1
     end
 
+    test "deep first search" do
+      cpp = Algorithms.Node.new(name: "C++")
+      erlang = Algorithms.Node.new(name: "Erlang")
+      {:ok, cpp} = Algorithms.Node.insert(cpp, [erlang])
+      graph = Algorithms.Graph.new(nodes: [cpp])
+      {state, node, path} = Algorithms.Search.dfs(graph, erlang)
+      assert state == :ok
+      assert node == erlang
+      assert path == [cpp, erlang]
+      elixir = Algorithms.Node.new(name: "Elixir")
+      {state, node} = Algorithms.Search.dfs(graph, elixir)
+      assert state == :error
+      assert node == elixir
+    end
+
+    test "more complex DFS" do
+      grandfather = Algorithms.Node.new(name: "Richard")
+      grandmother = Algorithms.Node.new(name: "Violett")
+      father = Algorithms.Node.new(name: "Bob")
+      mother = Algorithms.Node.new(name: "Alice")
+      son = Algorithms.Node.new(name: "Charlie")
+      {:ok, mother} = Algorithms.Node.insert(mother, [son])
+      {:ok, grandfather} = Algorithms.Node.insert(grandfather, [mother])
+      {:ok, grandmother} = Algorithms.Node.insert(grandmother, [father])
+      family = Algorithms.Graph.new(nodes: [grandfather, grandmother])
+      {:ok, _, path} = Algorithms.Search.dfs(family, son)
+      assert path == [grandfather, mother, son]
+      {:ok, _, path} = Algorithms.Search.dfs(family, grandmother)
+      assert path == [grandmother]
+    end
+
 end
 
 defmodule GraphTest do
@@ -130,36 +161,5 @@ defmodule GraphTest do
         second_node = Algorithms.Node.new(name: "Tail")
         {:ok, node} = Algorithms.Node.insert(node, [first_node, second_node])
         assert node.nodes == [first_node, second_node]
-    end
-
-    test "deep first search" do
-      cpp = Algorithms.Node.new(name: "C++")
-      erlang = Algorithms.Node.new(name: "Erlang")
-      {:ok, cpp} = Algorithms.Node.insert(cpp, [erlang])
-      graph = Algorithms.Graph.new(nodes: [cpp])
-      {state, node, path} = Algorithms.dfs(graph, erlang)
-      assert state == :ok
-      assert node == erlang
-      assert path == [cpp, erlang]
-      elixir = Algorithms.Node.new(name: "Elixir")
-      {state, node} = Algorithms.dfs(graph, elixir)
-      assert state == :error
-      assert node == elixir
-    end
-
-    test "more complex DFS" do
-      grandfather = Algorithms.Node.new(name: "Richard")
-      grandmother = Algorithms.Node.new(name: "Violett")
-      father = Algorithms.Node.new(name: "Bob")
-      mother = Algorithms.Node.new(name: "Alice")
-      son = Algorithms.Node.new(name: "Charlie")
-      {:ok, mother} = Algorithms.Node.insert(mother, [son])
-      {:ok, grandfather} = Algorithms.Node.insert(grandfather, [mother])
-      {:ok, grandmother} = Algorithms.Node.insert(grandmother, [father])
-      family = Algorithms.Graph.new(nodes: [grandfather, grandmother])
-      {:ok, _, path} = Algorithms.dfs(family, son)
-      assert path == [grandfather, mother, son]
-      {:ok, _, path} = Algorithms.dfs(family, grandmother)
-      assert path == [grandmother]
     end
 end
