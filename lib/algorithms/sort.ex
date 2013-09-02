@@ -53,4 +53,37 @@ defmodule Algorithms.Sort do
         {left, right} = Enum.partition tail, &1 < head
         quick(left) ++ [head] ++ quick(right)
     end
+
+    @doc """
+    Implementation for merge to be used in merge sort.
+    It takes two sorted lists (in ascending order) and returns another list with elements from original lists in order.
+
+    # Example
+    
+        merge([1,3,5],[2,3,4,5])
+        #=> [1,2,3,3,4,5]
+
+    """
+    def merge(xs, []), do: xs
+    def merge([], ys), do: ys
+    def merge([x | xs], [y | ys]) do
+      if x < y do
+        [x | merge(xs, [y | ys])]
+      else
+        [y | merge([x | xs], ys)]
+      end
+    end
+
+    @doc """
+    Top down merge sort implementation of merge sort on lists.
+    """
+    def merge_sort([]),  do: []
+    def merge_sort([x]), do: [x]
+    def merge_sort(xs) do
+      half = div length(xs), 2
+      merge(
+        xs |> Enum.take(half) |> merge_sort,
+        xs |> Enum.drop(half) |> merge_sort
+      )
+    end
 end

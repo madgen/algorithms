@@ -67,6 +67,11 @@ defmodule SortTest do
         assert result == [0, 1, 8, 10, 12]
     end
 
+    test "mergesort" do
+      numbers = [12, 0, 1, 8, 10, 2, 3, 4, 3]
+      result = Algorithms.Sort.merge_sort numbers
+      assert result == [0, 1, 2, 3, 3, 4, 8, 10, 12]
+    end
 end
 
 defmodule SearchTest do
